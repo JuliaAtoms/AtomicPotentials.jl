@@ -35,6 +35,7 @@ Base.show(io::IO, p::PointCharge) =
     write(io, "Z = $(p.Z)")
 
 (p::PointCharge{T})(::O, r::U) where {T,O,U} = -p.Z/r
+(p::PointCharge{T})(::O, r::VU) where {T,O,U,VU<:AbstractVector{U}} = -p.Z./r
 
 charge(p::PointCharge) = p.Z
 
