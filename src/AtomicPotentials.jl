@@ -45,6 +45,8 @@ ground_state(p::PointCharge{<:Integer}) =
 ground_state(p::PointCharge) =
     throw(ArgumentError("Ground state configuration for nuclear charge of Z = $(p.Z) unknown"))
 
-export AbstractPotential, element_number, PointCharge, @pc_str, charge, ground_state
+islocal(::PointCharge) = true
+
+export AbstractPotential, element_number, PointCharge, @pc_str, charge, ground_state, islocal
 
 end # module
