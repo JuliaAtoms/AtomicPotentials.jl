@@ -47,6 +47,21 @@ ground_state(p::PointCharge) =
 
 islocal(::PointCharge) = true
 
-export AbstractPotential, element_number, PointCharge, @pc_str, charge, ground_state, islocal
+# * Yukawa
+struct Yukawa{T} <: AbstractPotential{T}
+    g::T
+    α::T
+end
+
+charge(::Yukawa) = 1
+ground_state(::Yukawa) = c"1s"
+
+(p::Yukawa{T})(::O, r::U) where {T,O,U} = -p.g^2*exp(-p.α*r)/r
+
+islocal(::Yukawa) = true
+
+# * Exports
+
+export AbstractPotential, element_number, PointCharge, @pc_str, charge, ground_state, islocal, Yukawa
 
 end # module
